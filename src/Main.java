@@ -2,7 +2,8 @@ import createpatters.abstractfactory.CheckoutService;
 import createpatters.abstractfactory.IndiaFactory;
 import createpatters.abstractfactory.USFactory;
 import createpatters.factorypatters.LogisticService;
-import createpatters.factorypatters.Logistics;
+import createpatters.prototype.EmailTemplate;
+import createpatters.prototype.EmailTemplateRegistry;
 import createpatters.singleton.BellPushedSingleton;
 import createpatters.singleton.EagerSingleton;
 import createpatters.singleton.LazySynchronizedSingleton;
@@ -16,7 +17,8 @@ public class Main {
     enum CreatePatternType {
         SINGLETON,
         FACTORY,
-        ABSTRACT_FACTORY
+        ABSTRACT_FACTORY,
+        PROTOTYPE
     }
     private static void singleton(String type){
 
@@ -52,6 +54,12 @@ public class Main {
 
     }
 
+    private static void prototypePattern(){
+        EmailTemplate welcomeEmail1 = EmailTemplateRegistry.getTemplate("welcome");
+        welcomeEmail1.setContent("Hi Alice, welcome to TUF Premium!");
+        welcomeEmail1.send("alice@example.com");
+    }
+
     private static void decideCreatePattern(String type){
         if(type.equalsIgnoreCase(String.valueOf(CreatePatternType.SINGLETON))){
             singleton(String.valueOf(Singleton.BELL_PUSHED));
@@ -62,11 +70,14 @@ public class Main {
         else if (type.equalsIgnoreCase(String.valueOf(CreatePatternType.ABSTRACT_FACTORY))){
             abstractFactoryPattern();
         }
+        else if(type.equalsIgnoreCase(String.valueOf(CreatePatternType.PROTOTYPE))){
+            prototypePattern();
+        }
     }
 
 
     public static void main(String[] args) {
-        decideCreatePattern(String.valueOf(CreatePatternType.ABSTRACT_FACTORY));
+        decideCreatePattern(String.valueOf(CreatePatternType.PROTOTYPE));
 
     }
 }
