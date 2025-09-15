@@ -4,12 +4,12 @@ import createpatters.abstractfactory.interfaces.Invoice;
 import createpatters.abstractfactory.interfaces.PaymentGateway;
 import createpatters.abstractfactory.interfaces.RegionFactory;
 
-public class CheckoutService {
+public class CreateCheckoutService {
     private PaymentGateway paymentGateway;
     private Invoice invoice;
     private String gatewayType;
 
-    public CheckoutService(RegionFactory factory, String gatewayType) {
+    public CreateCheckoutService(RegionFactory factory, String gatewayType) {
         this.gatewayType = gatewayType;
         this.paymentGateway = factory.createPaymentGateway(gatewayType);
         this.invoice = factory.createInvoice();
